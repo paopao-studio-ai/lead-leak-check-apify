@@ -1,0 +1,21 @@
+{
+  "actorSpecification": 1,
+  "fields": {},
+  "views": {
+    "overview": {
+      "title": "Reports",
+      "transformation": { "fields": ["inputType", "pipeline", "risk_score", "counts", "findings", "notes"] },
+      "display": {
+        "component": "table",
+        "properties": {
+          "inputType": { "label": "Input", "format": "text" },
+          "pipeline": { "label": "Pipeline", "format": "text" },
+          "risk_score": { "label": "Risk score (0-100)", "format": "number" },
+          "counts": { "label": "Findings by severity", "format": "object" },
+          "findings": { "label": "Findings (ranked)", "format": "array" },
+          "notes": { "label": "Notes", "format": "array" }
+        }
+      }
+    }
+  }
+}

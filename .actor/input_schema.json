@@ -1,0 +1,32 @@
+{
+  "title": "Lead Leak Check input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "pipelineDescription": {
+      "title": "Pipeline description (plain English)",
+      "type": "string",
+      "editor": "textarea",
+      "description": "Where leads come from, where they are stored, who replies and what alerts exist. Example: 'Leads come from a Typeform and WhatsApp into Google Sheets via Zapier on the free plan. Nobody is assigned. ChatGPT drafts replies. No error alerts.'",
+      "prefill": "Leads come from a Typeform and WhatsApp into Google Sheets via Zapier on the free plan. Nobody is assigned; Slack pings #sales. ChatGPT drafts replies. No error alerts."
+    },
+    "pipelineConfig": {
+      "title": "Pipeline config (JSON, optional)",
+      "type": "object",
+      "editor": "json",
+      "description": "Structured config for exact results. Keys (all optional): name, sources[], storage, routing, response, monitoring, automation, timezone, follow_up. See README."
+    },
+    "runHistoryCsv": {
+      "title": "Run-history CSV (optional)",
+      "type": "string",
+      "editor": "textarea",
+      "description": "Paste a Zapier/Make/n8n run-history export with a header row. Needs a status column; a timestamp column enables gap and stale-workflow checks."
+    },
+    "expectedIntervalMinutes": {
+      "title": "Expected minutes between runs (optional)",
+      "type": "integer",
+      "minimum": 1,
+      "description": "Used with the CSV. If empty, the typical gap in the CSV is used."
+    }
+  }
+}
