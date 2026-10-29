@@ -1,6 +1,34 @@
 {
+  "$schema": "https://apify-projects.github.io/actor-json-schemas/dataset.json?v=0.3",
   "actorSpecification": 1,
-  "fields": {},
+  "fields": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "inputType": { "type": "string", "enum": ["description", "config", "run_history", "sample"], "description": "Which input produced this report; 'sample' = built-in example used because the input was empty." },
+      "pipeline": { "type": "string", "description": "Pipeline name.", "example": "Typeform -> Google Sheets -> Slack #sales" },
+      "risk_score": { "type": "integer", "minimum": 0, "maximum": 100, "description": "0 = no known risk, 100 = leaking everywhere.", "example": 87 },
+      "counts": { "type": "object", "description": "Number of findings per severity (high, medium, low, verify)." },
+      "findings": {
+        "type": "array",
+        "description": "Findings ranked high -> verify.",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "string" },
+            "severity": { "type": "string", "enum": ["high", "medium", "low", "verify"] },
+            "title": { "type": "string" },
+            "why": { "type": "string" },
+            "fix": { "type": "string" },
+            "evidence": { "type": "string" }
+          }
+        }
+      },
+      "notes": { "type": "array", "items": { "type": "string" }, "description": "Parser notes and run-history summary." },
+      "report_markdown": { "type": "string", "description": "The same report as Markdown." }
+    },
+    "required": ["inputType", "pipeline", "risk_score", "counts", "findings", "notes"]
+  },
   "views": {
     "overview": {
       "title": "Reports",

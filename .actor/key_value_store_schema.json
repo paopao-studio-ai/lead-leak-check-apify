@@ -1,0 +1,14 @@
+{
+  "$schema": "https://apify-projects.github.io/actor-json-schemas/key-value-store.json?v=0.3",
+  "actorKeyValueStoreSchemaVersion": 1,
+  "title": "Lead Leak Check key-value store",
+  "description": "Holds the combined Markdown report of the run.",
+  "collections": {
+    "report": {
+      "title": "Markdown report",
+      "description": "All risk reports of the run as one Markdown document.",
+      "key": "REPORT.md",
+      "contentTypes": ["text/markdown"]
+    }
+  }
+}

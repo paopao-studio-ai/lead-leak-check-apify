@@ -1,0 +1,20 @@
+{
+  "$schema": "https://apify-projects.github.io/actor-json-schemas/output.json?v=0.3",
+  "actorOutputSchemaVersion": 1,
+  "title": "Lead Leak Check output",
+  "description": "One dataset item per risk report (0-100 score, counts by severity, ranked findings with why/fix) plus a combined Markdown report in the key-value store.",
+  "properties": {
+    "results": {
+      "type": "string",
+      "title": "Risk reports",
+      "description": "Dataset items, one per analysed input (description, config or run-history CSV): inputType, pipeline, risk_score, counts, findings[], notes[], report_markdown.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items?view=overview"
+    },
+    "report": {
+      "type": "string",
+      "title": "Markdown report",
+      "description": "REPORT.md record in the default key-value store: all reports of the run as one Markdown document.",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/records/REPORT.md"
+    }
+  }
+}

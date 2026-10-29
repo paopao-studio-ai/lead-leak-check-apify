@@ -3,10 +3,19 @@
   "name": "lead-leak-check",
   "title": "Lead Leak Check: find dropped leads in Zapier, Make and n8n",
   "description": "Audits a lead pipeline (plain-English description, JSON config or run-history CSV) and returns a 0-100 risk score with ranked findings and fixes. Offline rules, no logins, no scraping.",
-  "version": "0.1",
+  "version": "0.2",
   "buildTag": "latest",
-  "meta": { "templateId": "python-start" },
+  "meta": {
+    "templateId": "python-start"
+  },
+  "minMemoryMbytes": 128,
+  "maxMemoryMbytes": 512,
+  "readme": "../README.md",
   "input": "./input_schema.json",
+  "output": "./output_schema.json",
   "dockerfile": "../Dockerfile",
-  "storages": { "dataset": "./dataset_schema.json" }
+  "storages": {
+    "dataset": "./dataset_schema.json",
+    "keyValueStore": "./key_value_store_schema.json"
+  }
 }

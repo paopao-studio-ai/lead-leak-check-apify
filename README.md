@@ -8,9 +8,18 @@ This Actor reads a description of your lead pipeline and returns a **0–100 ris
 - **Unstated safeguards are reported as `verify`**, never as safe, so a vague description never looks like a clean bill of health.
 - The same rules are open source as an MCP server: [lead-leak-check-mcp](https://github.com/paopao-studio-ai/lead-leak-check-mcp).
 
+## How to use it
+
+1. Click **Try for free** / **Start**. The input is pre-filled with an example pipeline, so the first run works as-is.
+2. Replace the example with your own pipeline: a few sentences, a JSON config, or a run-history CSV export.
+3. Open the **Output** tab: one row per report with the risk score and ranked findings, plus the full Markdown report (`REPORT.md`).
+
+Runs finish in a few seconds and use the smallest memory size.
+
 ## Input
 
 Fill in any one or more of these fields. Each one produces one report, which is one dataset item.
+If you start a run with **no input at all** (for example `{}` through the API, a schedule or an integration), the Actor analyses a built-in sample pipeline and returns one free demo report marked `"inputType": "sample"`, so you can see the output format.
 
 | Field | What to paste |
 |---|---|
@@ -35,14 +44,14 @@ Fill in any one or more of these fields. Each one produces one report, which is 
 
 ## Output
 
-One dataset item per report:
+One dataset item per report. This is the real (shortened) result for the pre-filled example, *"Leads come from a Typeform and WhatsApp into Google Sheets via Zapier on the free plan. Nobody is assigned; Slack pings #sales. ChatGPT drafts replies. No error alerts."*:
 
 ```json
 {
-  "inputType": "config",
-  "pipeline": "Typeform -> Google Sheets -> Slack #sales",
-  "risk_score": 100,
-  "counts": { "high": 4, "medium": 5, "low": 3, "verify": 0 },
+  "inputType": "description",
+  "pipeline": "described pipeline",
+  "risk_score": 87,
+  "counts": { "high": 2, "medium": 1, "low": 0, "verify": 11 },
   "findings": [
     {
       "id": "no-owner",
@@ -51,14 +60,41 @@ One dataset item per report:
       "why": "Leads posted to a shared sheet or channel are seen by everyone and answered by no one.",
       "fix": "Assign an owner per lead (round robin or fixed) at the moment it is created, and name them in the notification.",
       "evidence": ""
+    },
+    {
+      "id": "no-error-alert",
+      "severity": "high",
+      "title": "Failed or disabled automations are silent",
+      "why": "Expired connections, plan limits or a teammate's edit can switch a workflow off with no notification.",
+      "fix": "Turn on error notifications (Zapier/Make/n8n error workflow) to a channel someone watches, and alert when no run happened in the expected window.",
+      "evidence": ""
+    },
+    {
+      "id": "free-plan-limits",
+      "severity": "medium",
+      "title": "Automation runs on a free plan",
+      "why": "Free tiers cap tasks/operations and polling frequency; when the cap is hit, runs stop until the next cycle.",
+      "fix": "Check monthly task usage against lead volume and set a usage alert, or move the lead workflow to a paid or self-hosted plan.",
+      "evidence": ""
     }
   ],
-  "notes": [],
+  "notes": [
+    "Parsed from free text with keyword rules; send a JSON config (see check_pipeline) for exact results.",
+    "11 safeguard(s) were not described; they are listed as 'verify'. Fill them in for a sharper result."
+  ],
   "report_markdown": "# Lead leak risk: ..."
 }
 ```
 
-A combined Markdown report is also saved to the default key-value store as `REPORT.md`.
+| Field | Meaning |
+|---|---|
+| `inputType` | `description`, `config`, `run_history`, or `sample` (built-in demo for an empty input) |
+| `risk_score` | 0 = no known risk, 100 = leaking everywhere |
+| `counts` | Findings per severity: `high`, `medium`, `low`, `verify` (not stated, please check) |
+| `findings` | Ranked high to verify; each has `why` and a concrete `fix` |
+| `report_markdown` | The same report as Markdown, ready to paste into a doc or ticket |
+
+All reports of the run are also combined into one Markdown file, `REPORT.md`, in the run's key-value store. Both are linked on the **Output** tab and available through the API (`/datasets/{id}/items` and `/key-value-stores/{id}/records/REPORT.md`).
 
 ## What it checks
 
@@ -66,7 +102,15 @@ Owner assignment, unanswered-lead (SLA) alerts, error alerts, response-time targ
 
 ## Pricing
 
-Pay per event: you pay only for each report produced, which is one dataset item. Empty or invalid input is not charged.
+**Pay per report.** You pay a flat price for each report produced, which is one dataset item. There is no subscription. A run with all three fields filled in produces three reports. Empty or invalid input is never charged, and the demo report for an empty input is free. If you set a maximum charge per run, the Actor stops before a report it cannot charge.
+
+## FAQ
+
+**Does it log in to my Zapier, Make or n8n account?** No. It only reads what you paste. Nothing is fetched or stored outside your own Apify run.
+
+**Why do I get `verify` findings?** The description did not mention that safeguard. The Actor will not assume it exists. State it (for example "errors alert #ops") or use the JSON config to clear it.
+
+**Can I call it from Zapier, Make, n8n or an AI agent?** Yes. Use the Apify integration or the API with a JSON input, then read the dataset items or `REPORT.md`.
 
 ## Run locally
 
