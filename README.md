@@ -1,11 +1,13 @@
-# Lead Leak Check: find dropped leads in Zapier, Make and n8n
+# Lead Leak Check — Zapier, Make & n8n Lead Pipeline Audit
 
 Your Zapier, Make or n8n runs say **Success**, but some leads still never hear back. Nobody owned the reply, a filter stopped on an empty field, the workflow was off for a day, or an AI draft sat unsent.
 
-This Actor reads a description of your lead pipeline and returns a **0–100 risk score** with **ranked findings**. Each finding says why leads leak there and gives a concrete fix.
+**Lead Leak Check audits your lead pipeline / lead-to-CRM workflow, not your website.** You paste a plain-English description, a JSON config, or a run-history CSV export; it returns a **0–100 leak-risk score** with **ranked findings**, and each finding says why leads leak there and gives a concrete fix. Built for agencies and automation freelancers auditing a client's lead routing, sales ops checking speed-to-lead safeguards, and founders running leads through Zapier/Make/n8n into Sheets, HubSpot or Slack.
 
-- **No logins, no scraping, no API keys.** Everything runs on 15 offline rules. Your data is only used for this run.
+- **No logins, no scraping, no API keys.** Everything runs on 15 offline rules over what you paste. Your data is only used for this run.
+- **It does not crawl or test websites or contact forms.** It only knows what you describe or export.
 - **Unstated safeguards are reported as `verify`**, never as safe, so a vague description never looks like a clean bill of health.
+- **$0.05 per report**, the demo report for an empty input is not charged as a report (details under *Pricing*).
 - The same rules are open source as an MCP server: [lead-leak-check-mcp](https://github.com/paopao-studio-ai/lead-leak-check-mcp).
 
 ## How to use it
@@ -102,9 +104,11 @@ Owner assignment, unanswered-lead (SLA) alerts, error alerts, response-time targ
 
 ## Pricing
 
-**Pay per report.** You pay a flat price for each report produced, which is one dataset item. There is no subscription. A run with all three fields filled in produces three reports. Empty or invalid input is never charged, and the demo report for an empty input is free. If you set a maximum charge per run, the Actor stops before a report it cannot charge.
+**Pay per report: $0.05 per report** (one dataset item), plus Apify's standard Actor-start event of $0.00005 per GB of memory per run. There is no subscription. A run with all three fields filled in produces three reports. Empty or invalid input is never charged, and the demo report for an empty input is not charged as a report (only the tiny Actor-start event applies). If you set a maximum charge per run, the Actor stops before a report it cannot charge.
 
 ## FAQ
+
+**Does it scan my website or test my contact form?** No. It does not fetch any URL. Describe the form and where its leads go, and the rules check the pipeline behind it.
 
 **Does it log in to my Zapier, Make or n8n account?** No. It only reads what you paste. Nothing is fetched or stored outside your own Apify run.
 
