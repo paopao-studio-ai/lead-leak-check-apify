@@ -254,7 +254,7 @@ _KW: list[tuple[str, str, Any]] = [
     (r"\b(only in (the |my )?(inbox|email|whatsapp|phone)|just (in )?(the )?inbox)\b", "storage.type", "none"),
     (r"\b(free plan|free tier|free account)\b", "automation.plan", "free"),
     (r"\b(paid plan|professional plan|team plan|self[- ]hosted)\b", "automation.plan", "paid"),
-    (r"\b(no (one|body) (works|answers) (at night|on weekends)|weekends? (are|is) (not covered|uncovered)|no after[- ]hours)\b", "routing.after_hours_coverage", False),
+    (r"\b(no ?(one|body) (works|answers) (at night|on weekends)|weekends? (are|is) (not covered|uncovered)|no after[- ]hours)\b", "routing.after_hours_coverage", False),
     (r"\b(24/7|on[- ]call|after[- ]hours (coverage|team|rota))\b", "routing.after_hours_coverage", True),
     (r"\b(auto[- ]?(reply|responder|acknowledg\w*)|instant (reply|confirmation))\b", "response.auto_ack", True),
     (r"\b(chatgpt|claude|gpt|openai|ai[- ](draft|reply|replies|writes))\b", "response.ai_drafts", True),

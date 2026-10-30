@@ -87,3 +87,16 @@ def test_readme_is_store_ready():
     for needle in ("## Input", "## Output", "Pay per report", "REPORT.md"):
         assert needle in text, needle
     assert "placeholder" not in text.lower() and "TODO" not in text
+
+
+def test_prefill_triggers_multiple_rules():
+    from src.lead_leak_check import check_description
+    rep = check_description(SAMPLE_DESCRIPTION).as_dict()
+    hits = {f["id"] for f in rep["findings"] if f["severity"] != "verify"}
+    assert {"no-owner", "no-error-alert", "no-after-hours", "no-follow-up"} <= hits
+
+
+def test_nobody_works_on_weekends_is_after_hours_gap():
+    from src.lead_leak_check.rules import config_from_text
+    for t in ("Nobody works on weekends.", "No one answers at night.", "No after-hours cover."):
+        assert config_from_text(t)["routing"]["after_hours_coverage"] is False

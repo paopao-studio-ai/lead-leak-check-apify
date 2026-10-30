@@ -25,7 +25,7 @@ If you start a run with **no input at all** (for example `{}` through the API, a
 
 | Field | What to paste |
 |---|---|
-| `pipelineDescription` | Plain English: "Typeform and WhatsApp leads go to Google Sheets via Zapier on the free plan. Nobody is assigned. No error alerts." |
+| `pipelineDescription` | Plain English: "Webflow contact form into HubSpot via Zapier. Nobody is assigned. No error alerts. Nobody works on weekends." |
 | `pipelineConfig` | Structured JSON for exact results (shape below) |
 | `runHistoryCsv` | Run-history export with a `status` column and, optionally, a `timestamp` column |
 | `expectedIntervalMinutes` | Optional. Expected minutes between runs, used for the CSV gap check |
@@ -46,14 +46,19 @@ If you start a run with **no input at all** (for example `{}` through the API, a
 
 ## Output
 
-One dataset item per report. This is the real (shortened) result for the pre-filled example, *"Leads come from a Typeform and WhatsApp into Google Sheets via Zapier on the free plan. Nobody is assigned; Slack pings #sales. ChatGPT drafts replies. No error alerts."*:
+One dataset item per report. This is the real (shortened) result for the pre-filled example, *"Leads come from a Webflow contact form into HubSpot via Zapier. Nobody is assigned; new leads just post to Slack #sales. No error alerts if the Zap fails. Nobody works on weekends, so Friday-night leads wait until Monday. No follow-ups after the first reply."* (4 rules fire: 2 high, 1 medium, 1 low; 8 safeguards not mentioned are listed as `verify`):
 
 ```json
 {
   "inputType": "description",
   "pipeline": "described pipeline",
-  "risk_score": 87,
-  "counts": { "high": 2, "medium": 1, "low": 0, "verify": 11 },
+  "risk_score": 82,
+  "counts": {
+    "high": 2,
+    "medium": 1,
+    "low": 1,
+    "verify": 8
+  },
   "findings": [
     {
       "id": "no-owner",
@@ -72,17 +77,17 @@ One dataset item per report. This is the real (shortened) result for the pre-fil
       "evidence": ""
     },
     {
-      "id": "free-plan-limits",
+      "id": "no-after-hours",
       "severity": "medium",
-      "title": "Automation runs on a free plan",
-      "why": "Free tiers cap tasks/operations and polling frequency; when the cap is hit, runs stop until the next cycle.",
-      "fix": "Check monthly task usage against lead volume and set a usage alert, or move the lead workflow to a paid or self-hosted plan.",
+      "title": "No after-hours or weekend coverage",
+      "why": "Leads that arrive at night or on weekends wait until the next business day, often past the buyer's patience.",
+      "fix": "Send an instant acknowledgement with the next reply time, and escalate weekend leads to an on-call person.",
       "evidence": ""
     }
   ],
   "notes": [
     "Parsed from free text with keyword rules; send a JSON config (see check_pipeline) for exact results.",
-    "11 safeguard(s) were not described; they are listed as 'verify'. Fill them in for a sharper result."
+    "8 safeguard(s) were not described; they are listed as 'verify'. Fill them in for a sharper result."
   ],
   "report_markdown": "# Lead leak risk: ..."
 }

@@ -23,8 +23,9 @@ EVENT = "report"
 
 # Same text as the input-schema prefill. Used only when the run input has no pipeline at all.
 SAMPLE_DESCRIPTION = (
-    "Leads come from a Typeform and WhatsApp into Google Sheets via Zapier on the free plan. "
-    "Nobody is assigned; Slack pings #sales. ChatGPT drafts replies. No error alerts."
+    "Leads come from a Webflow contact form into HubSpot via Zapier. "
+    "Nobody is assigned; new leads just post to Slack #sales. No error alerts if the Zap fails. "
+    "Nobody works on weekends, so Friday-night leads wait until Monday. No follow-ups after the first reply."
 )
 INPUT_KEYS = ("pipelineDescription", "pipelineConfig", "runHistoryCsv")
 
