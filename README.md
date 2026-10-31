@@ -8,7 +8,6 @@ Your Zapier, Make or n8n runs say **Success**, but some leads still never hear b
 - **It does not crawl or test websites or contact forms.** It only knows what you describe or export.
 - **Unstated safeguards are reported as `verify`**, never as safe, so a vague description never looks like a clean bill of health.
 - **$0.05 per report**, the demo report for an empty input is not charged as a report (details under *Pricing*).
-- The same rules are open source as an MCP server: [lead-leak-check-mcp](https://github.com/paopao-studio-ai/lead-leak-check-mcp).
 
 ## How to use it
 
@@ -120,6 +119,8 @@ Owner assignment, unanswered-lead (SLA) alerts, error alerts, response-time targ
 **Why do I get `verify` findings?** The description did not mention that safeguard. The Actor will not assume it exists. State it (for example "errors alert #ops") or use the JSON config to clear it.
 
 **Can I call it from Zapier, Make, n8n or an AI agent?** Yes. Use the Apify integration or the API with a JSON input, then read the dataset items or `REPORT.md`.
+
+**Is this an MCP server or a WhatsApp / social scraper?** No. This Actor is a **Zapier / Make / n8n lead-pipeline audit** on Apify: you paste a description, JSON config or run-history CSV and get a leak-risk score. WhatsApp and similar chat apps appear only as optional *lead source types* in the rules (for example “chat leads not logged”). The same offline rules are also published separately as an open-source MCP for IDE use ([lead-leak-check-mcp](https://github.com/paopao-studio-ai/lead-leak-check-mcp)); that is a different surface, not this Store listing.
 
 ## Run locally
 
