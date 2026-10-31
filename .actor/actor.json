@@ -1,8 +1,8 @@
 {
   "actorSpecification": 1,
   "name": "lead-leak-check",
-  "title": "Lead Leak Check - Zapier, Make & n8n Lead Audit",
-  "description": "Paste your lead pipeline (plain English, JSON config or run-history CSV) and get a 0-100 leak-risk score with ranked fixes. 15 offline rules. Does not crawl websites.",
+  "title": "Lead Leak Check — Zapier, Make & n8n Lead Pipeline Audit",
+  "description": "Audit your Zapier, Make or n8n lead pipeline (plain English, JSON config or run-history CSV) and get a 0–100 leak-risk score with ranked fixes for speed-to-lead and lost leads. 15 offline rules. Does not crawl websites.",
   "version": "0.2",
   "buildTag": "latest",
   "meta": {

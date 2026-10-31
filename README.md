@@ -103,7 +103,7 @@ One dataset item per report. This is the real (shortened) result for the pre-fil
 
 All reports of the run are also combined into one Markdown file, `REPORT.md`, in the run's key-value store. Both are linked on the **Output** tab and available through the API (`/datasets/{id}/items` and `/key-value-stores/{id}/records/REPORT.md`).
 
-## What it checks
+## What it checks (lead routing and speed-to-lead)
 
 Owner assignment, unanswered-lead (SLA) alerts, error alerts, response-time target, system of record, chat leads (WhatsApp/DM) not logged, silent filters on empty fields, unsent AI drafts, after-hours coverage, instant acknowledgement, deduplication, timezone mismatch, free-plan limits, follow-up sequence and run-history review. From a run-history CSV it flags failed and halted runs, quietly filtered runs, long gaps with no runs and a stale last run.
 
