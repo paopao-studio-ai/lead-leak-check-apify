@@ -17,5 +17,9 @@
   "storages": {
     "dataset": "./dataset_schema.json",
     "keyValueStore": "./key_value_store_schema.json"
+  },
+  "exampleRunInput": {
+    "body": "{\n  \"pipelineDescription\": \"Leads come from a Webflow contact form into HubSpot via Zapier. Nobody is assigned; new leads just post to Slack #sales. No error alerts if the Zap fails. Nobody works on weekends, so Friday-night leads wait until Monday. No follow-ups after the first reply.\"\n}",
+    "contentType": "application/json; charset=utf-8"
   }
 }

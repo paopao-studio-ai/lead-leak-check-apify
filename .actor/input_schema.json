@@ -8,7 +8,8 @@
       "type": "string",
       "editor": "textarea",
       "description": "Where leads come from, where they are stored, who replies and what alerts exist. Example: 'Webflow contact form into HubSpot via Zapier. Nobody is assigned. No error alerts. Nobody works on weekends.' If all three inputs are empty, a built-in sample pipeline is analysed (free demo report).",
-      "prefill": "Leads come from a Webflow contact form into HubSpot via Zapier. Nobody is assigned; new leads just post to Slack #sales. No error alerts if the Zap fails. Nobody works on weekends, so Friday-night leads wait until Monday. No follow-ups after the first reply."
+      "prefill": "Leads come from a Webflow contact form into HubSpot via Zapier. Nobody is assigned; new leads just post to Slack #sales. No error alerts if the Zap fails. Nobody works on weekends, so Friday-night leads wait until Monday. No follow-ups after the first reply.",
+      "example": "Leads come from a Webflow contact form into HubSpot via Zapier. Nobody is assigned; new leads just post to Slack #sales. No error alerts if the Zap fails. Nobody works on weekends, so Friday-night leads wait until Monday. No follow-ups after the first reply."
     },
     "pipelineConfig": {
       "title": "Pipeline config (JSON, optional)",
