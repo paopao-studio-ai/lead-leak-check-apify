@@ -134,4 +134,11 @@ pip install pytest && python -m pytest -q tests
 
 Or `apify run` with the [Apify CLI](https://docs.apify.com/cli).
 
+## Related Actors by PaoPao Studio
+- [ATS Jobs & Hiring Signals](https://apify.com/goldenrod_serrano/ats-hiring-signals) — new and closed jobs from major ATS boards, with hiring signals per company.
+- [Workday Jobs & Hiring Signals](https://apify.com/goldenrod_serrano/workday-hiring-signals) — the same for Workday career sites.
+- [SEC Form D Scraper](https://apify.com/goldenrod_serrano/sec-form-d-funding-signals) — startup funding signals from SEC Form D.
+- [SEC Comment Letter Scraper](https://apify.com/goldenrod_serrano/sec-comment-letters) — SEC staff comment letters and company replies.
+- [NCUA Credit Union Call Report Scraper](https://apify.com/goldenrod_serrano/ncua-call-report) — US credit union 5300 call reports.
+
 Made by [Paopao Studio](https://paopao-studio.pages.dev/?utm_source=apify&utm_medium=readme). MIT license.
