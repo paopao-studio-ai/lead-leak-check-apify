@@ -17,6 +17,7 @@ from typing import Any
 
 from apify import Actor
 
+from .ppe_guard import check_charge_events
 from .lead_leak_check import analyze_history, check_config, check_description
 
 EVENT = "report"
@@ -96,6 +97,7 @@ def build_reports(inp: dict[str, Any]) -> tuple[list[dict[str, Any]], list[str]]
 
 async def main() -> None:
     async with Actor:
+        check_charge_events(["report"])  # loud WARNING if a PPE event would not be billed
         inp = await Actor.get_input() or {}
         if not isinstance(inp, dict):
             inp = {}
